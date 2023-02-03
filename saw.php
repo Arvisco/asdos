@@ -14,6 +14,9 @@
   function xkom(val) {
     document.getElementById('komx').value = val;
   }
+  function next(){
+    document.getElementById('neks').click;
+  }
 </script>
 <?php include 'cuy.php'; ?>
 
@@ -34,22 +37,22 @@
               <form action='' method='post'>
               <label for="customRange3" class="form-label">Kemahiran</label>
               <input type="range" class="form-range" min="1" max="5" step="1" onchange="kemahiran(this.value);" id="customRange3"><span>
-                <input type="text" name="kem" id="huh"></span>
+                <input type="hidden" name="kem" id="huh"></span>
 
               <label for="customRange3" class="form-label">Tanggung Jawab</label>
               <input type="range" class="form-range" min="1" max="5" step="1" onchange="xtj(this.value);" id="tj"><span>
-                <input type="text" name="tj" id="tjx"></span>
+                <input type="hidden" name="tj" id="tjx"></span>
 
               <label for="customRange3" class="form-label">Inisiatif &nbsp;</label>
               <input type="range" class="form-range" min="1" max="5" step="1" onchange="xins(this.value);" id="customRange3"><span>
-                <input type="text" name="ins" id="insx"></span>
+                <input type="hidden" name="ins" id="insx"></span>
 
               <label for="customRange3" class="form-label">Komunikatif</label>
               <input type="range" class="form-range" min="1" max="5" step="1" onchange="xkom(this.value);" id="customRange3"><span>
-                <input type="text" name="kom" id="komx"></span>
+                <input type="hidden" name="kom" id="komx"></span>
                 
                 
-                <button type="submit" name="gas" class="btn btn-primary">Input</button>
+                <button onclick="next()" type="submit" name="gas" class="btn btn-primary">Input</button>
                 </form>
 <?php 
 if(isset($_POST['gas'])){
@@ -59,6 +62,7 @@ if(isset($_POST['gas'])){
   $kom = $_POST['kom'];
   $wle = $a['keterangan'];
   mysqli_query($c, "UPDATE kandidat SET c1 = '$kem', c3 = '$tj', c4 = '$ins', c5='$kom' WHERE keterangan LIKE '$wle' ");
+
 }
 ?>
 
@@ -78,11 +82,7 @@ if(isset($_POST['gas'])){
 </div>
 <nav>
   <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <a class="page-link btn-success" <?php if ($xpages > 1) {
-                                          echo "href='?pages=$xprevious'";
-                                        } ?>>Previous</a>
-    </li>
+   
     <?php
     for ($x = 1; $x <= $xtotalpages; $x++) {
     ?>
@@ -91,7 +91,7 @@ if(isset($_POST['gas'])){
     }
     ?>
     <li class="page-item">
-      <a class="page-link" <?php if ($xpages < $xtotalpages) {
+      <a id="neks" class="page-link" <?php if ($xpages < $xtotalpages) {
                               echo "href='?pages=$xnext'";
                             } ?>>Next</a>
     </li>

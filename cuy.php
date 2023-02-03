@@ -37,7 +37,7 @@ error_reporting(0);
   </style>
 
   <?php 
-//data taker  
+//data taker saw
   $xlimit = 1;
 $xpages = isset($_GET['pages']) ? (int)$_GET['pages'] : 1;
 $xfirstpage = ($xpages > 1) ? ($xpages * $xlimit) - $xlimit : 0;
@@ -46,7 +46,39 @@ $xnext = $xpages + 1;
 $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
 $xprow = mysqli_num_rows($datakandidat);
 $xtotalpages = ceil($xprow / $xlimit);
-$products = mysqli_query($c, "SELECT * FROM kandidat LIMIT $xfirstpage, $xlimit");
+$products = mysqli_query($c, "SELECT * FROM kandidat ORDER BY id ASC LIMIT $xfirstpage, $xlimit ");
 $xnumber = $xfirstpage + 1;
+
+
+//data taker wp
+$wlimit = 1;
+$wpages = isset($_GET['pages']) ? (int)$_GET['pages'] : 1;
+$wfirstpage = ($wpages > 1) ? ($wpages * $wlimit) - $wlimit : 0;
+$wprevious = $wpages - 1;
+$wnext = $wpages + 1;
+$datawp = mysqli_query($c, "SELECT * FROM kandidat");
+$wprow = mysqli_num_rows($datawp);
+$wtotalpages = ceil($wprow / $wlimit);
+$wpdata = mysqli_query($c, "SELECT * FROM kandidat ORDER BY id DESC LIMIT $wfirstpage, $wlimit ");
+$wnumber = $wfirstpage + 1;
+
+
+$slimit = 1;
+$spages = isset($_GET['pages']) ? (int)$_GET['pages'] : 1;
+$sfirstpage = ($spages > 1) ? ($spages * $slimit) - $slimit : 0;
+$sprevious = $spages - 1;
+$snext = $spages + 1;
+$datasmart = mysqli_query($c, "SELECT * FROM kandidatsmart");
+$sprow = mysqli_num_rows($datasmart);
+$stotalpages = ceil($sprow / $slimit);
+$smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart ORDER BY RAND() LIMIT $sfirstpage, $slimit ");
+$snumber = $sfirstpage + 1;
   
+
+
+
+
+
+
+
   ?>

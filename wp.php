@@ -1,101 +1,102 @@
-<!-- <div class="row"> -->
-<div class="col-2">
-    <?php include 'misc.php'; ?></div>
-<div class="col-5 offset-sm-2">
-    <div class="ms-5 p-3 col-10 bg-light rounded-5">
-        <h1>Tabel Nilai W</h1>
-        <table class=" table table-borderless rounded-5 table-hover text-center">
-            <thead>
+<script>
+  function xtj(val) {
+    document.getElementById('tjx').value = val;
+  }
 
-                <tr>
+  function kemahiran(val) {
+    document.getElementById('huh').value = val;
+  }
 
-                    <th scope="col">W1</th>
-                    <th scope="col">W2</th>
-                    <th scope="col">W3</th>
-                    <th scope="col">W4</th>
-                    <th scope="col">W5</th>
+  function xins(val) {
+    document.getElementById('insx').value = val;
+  }
+
+  function xkom(val) {
+    document.getElementById('komx').value = val;
+  }
+</script>
+<?php include 'cuy.php'; ?>
+
+<div class="container">
+  <?php while($a=mysqli_fetch_assoc($wpdata)){ ?>
+    <div class="mx-5 col-6 bg-light rounded-5">
+      <div class="card mb-3 p-3" style="max-width: 600px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="img04.jpg" class="img-fluid rounded-start" alt="...">
+            <h5 class="card-title"><?= $a['nama'] ?></h5>
+            <p class="card-text"><?= $a['keterangan'] ?></p>
+            <p>Ipk : <?= $a['c2'] ?></p>
+
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <form action='' method='post'>
+              <label for="customRange3" class="form-label">Kemahiran</label>
+              <input type="range" class="form-range" min="1" max="5" step="1" onchange="kemahiran(this.value);" id="customRange3"><span>
+                <input type="text" name="kem" id="huh"></span>
+
+              <label for="customRange3" class="form-label">Tanggung Jawab</label>
+              <input type="range" class="form-range" min="1" max="5" step="1" onchange="xtj(this.value);" id="tj"><span>
+                <input type="text" name="tj" id="tjx"></span>
+
+              <label for="customRange3" class="form-label">Inisiatif &nbsp;</label>
+              <input type="range" class="form-range" min="1" max="5" step="1" onchange="xins(this.value);" id="customRange3"><span>
+                <input type="text" name="ins" id="insx"></span>
+
+              <label for="customRange3" class="form-label">Komunikatif</label>
+              <input type="range" class="form-range" min="1" max="5" step="1" onchange="xkom(this.value);" id="customRange3"><span>
+                <input type="text" name="kom" id="komx"></span>
+                
+                
+                <button type="submit" name="gas" class="btn btn-primary">Input</button>
+                </form>
+<?php 
+if(isset($_POST['gas'])){
+  $kem = $_POST['kem'];
+  $ins = $_POST['ins'];
+  $tj = $_POST['tj'];
+  $kom = $_POST['kom'];
+  $wle = $a['keterangan'];
+  mysqli_query($c, "UPDATE kandidatwp SET c1 = '$kem', c3 = '$tj', c4 = '$ins', c5='$kom' WHERE keterangan LIKE '$wle' ");
+}
+?>
 
 
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $wecapek = mysqli_query($c, "SELECT * FROM wp_w");
-                foreach ($wecapek as $w) :
-
-                ?>
-                    <tr>
-
-                        <td><?= $w['w1'] ?></td>
-                        <td><?= $w['w2'] ?></td>
-                        <td><?= $w['w3'] ?></td>
-                        <td><?= $w['w4'] ?></td>
-                        <td><?= $w['w5'] ?></td>
 
 
 
 
-                    </tr><?php endforeach; ?>
-            </tbody>
-
-        </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+  <?php }   ?>
+
 </div>
-
-<div class="col-8 offset-sm-2">
-    <div class="ms-5 p-3 col-10 bg-light rounded-5">
-        <h1>Tabel Vektor S & V</h1>
-        <form action='' method='post'><button type="submit" name="gatau">Proses Hasil Akhir</button></form>
-        <table class=" table table-borderless rounded-5 table-hover text-center">
-            <thead>
-
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Nilai S</th>
-                    <th scope="col">Nilai V</th>
-
-                    <!-- <th scope="col">Tanggung Jawab</th> -->
-                    <!-- <th scope="col">Inisiatif</th> -->
-                    <!-- <th scope="col">Komunikatif</th> -->
-
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-
-                $z = 1;
-                foreach ($asdos as $a) :
-                ?>
-                    <tr>
-                        <td><?= $z++ ?></td>
-                        <td><?= $a['nama'] ?></td>
-                        <?php
-                        $wecapek = mysqli_query($c, "SELECT * FROM wp_w");
-                        foreach ($wecapek as $w) :
-                        ?>
-                            <td><?= pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']) ?></td>
-
-
-                            <?php
-                            $cuki = pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']);
-                            $pusing = array($cuki);
-                            global $pusing, $cuki;
-                            ?>
-
-
-                        <!-- <?php endforeach; ?> -->
+<nav>
+  <ul class="pagination justify-content-center">
+   
+    <?php
+    for ($x = 1; $x <= $xtotalpages; $x++) {
+    ?>
+      <li class="page-item"><a class="page-link btn-success" href="?pages=<?php echo $x ?>"><?php echo $x; ?></a></li>
+    <?php
+    }
+    ?>
+    <li class="page-item">
+      <a class="page-link" <?php if ($xpages < $xtotalpages) {
+                              echo "href='?pages=$xnext'";
+                            } ?>>Next</a>
+    </li>
+  </ul>
+</nav>
 
 
 
-                    </tr>
-                <!-- <?php endforeach; ?> -->
 
-
-
-        </table>
-    </div>
-</div>
 <!-- </div> -->
 
 </body>

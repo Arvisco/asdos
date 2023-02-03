@@ -1,7 +1,7 @@
 <?php
 $c = mysqli_connect('localhost', 'root', '', 'asdos');
 $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
-// error_reporting(1);
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">

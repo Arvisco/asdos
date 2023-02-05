@@ -59,6 +59,8 @@ if(isset($_POST['gas'])){
   $kom = $_POST['kom'];
   $wle = $a['keterangan'];
   mysqli_query($c, "UPDATE kandidatsmart SET c1 = '$kem', c3 = '$tj', c4 = '$ins', c5='$kom' WHERE keterangan LIKE '$wle' ");
+  if ($xpages < $xtotalpages) {
+    header('Location:smart.php?pages='.$xnext); }
 }
 ?>
 
@@ -76,23 +78,7 @@ if(isset($_POST['gas'])){
   <?php }   ?>
 
 </div>
-<nav>
-  <ul class="pagination justify-content-center">
-   
-    <?php
-    for ($x = 1; $x <= $xtotalpages; $x++) {
-    ?>
-      <li class="page-item"><a class="page-link btn-success" href="?pages=<?php echo $x ?>"><?php echo $x; ?></a></li>
-    <?php
-    }
-    ?>
-    <li class="page-item">
-      <a class="page-link" <?php if ($xpages < $xtotalpages) {
-                              echo "href='?pages=$xnext'";
-                            } ?>>Next</a>
-    </li>
-  </ul>
-</nav>
+
 
 
 

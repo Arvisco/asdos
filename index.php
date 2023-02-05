@@ -47,7 +47,7 @@
         <a href="smart.php?method=scheffe" class="btn">Metode SMART</a>
       </div>
       <div class="row">
-        <a href="index.php" class="btn">Hasil</a>
+        <a href="hasilnya.php?met=scheffe" class="btn">Hasil</a>
       </div>
     </div>
   <?php } else { ?>
@@ -73,6 +73,9 @@
       </div>
       <div class="row">
         <a href="hasilnya.php" class="btn">Hasil</a>
+      </div>
+      <div class="row">
+        <a href="crudasdos.php" class="btn">Input Data Asdos</a>
       </div>
     </div>
   <?php } ?>

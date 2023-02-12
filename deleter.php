@@ -1,4 +1,5 @@
 <?php
+
 include 'cuy.php';
 $Z = $_GET['z'];
     mysqli_query($c, "DELETE FROM kandidat WHERE id LIKE '$Z' ");
@@ -13,4 +14,5 @@ $Z = $_GET['z'];
     
 
 header('Location:crudasdos.php');
+ob_flush();
 ?>

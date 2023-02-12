@@ -1,4 +1,4 @@
-<?php include 'cuy.php'; ?>
+<?php include 'cuy.php'; ob_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,12 +10,13 @@
 </head>
 
 <body>
-    <script>
+    <!-- <script>
         function press() {
             document.getElementById('p').click();
         }
-    </script>
-    <a class="btn-back" href="index.php"> < </a>
+    </script> -->
+    <a class="btn-back" href="index.php">
+         </a>
             <button id="p" class="button-90" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Asdos</button>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,7 +93,7 @@
                 </thead>
                 <tbody>
                     <?php $z = 1;
-                    foreach ($datakandidat as $d) { ?>
+                    foreach ($datakandidat as $d) : ?>
                         <tr>
                             <th><?= $z++ ?></th>
                             <td>
@@ -107,15 +108,16 @@
                             <td><?= $d['nama'] ?></td>
                             <td><?= $d['keterangan'] ?></td>
                             <td>
-                                <form method="post" action="">
+                                <form method="post" action="" enctype="multipart/form-data">
                                     <a href="deleter.php?z=<?= $d['id'] ?>" class="btn-hapus">Delete</a>
-                                    <a href="edit.php?z=<?=$d['id'] ?>" class="btn-edit">Edit</a>
+                                    <a href="edit.php?z=<?= $d['id'] ?>" class="btn-edit">Edit</a>
+
 
                                 </form>
                             </td>
                         </tr>
 
-                    <?php } ?>
+                    <?php endforeach; ob_flush(); ?>
 
                 </tbody>
             </table>

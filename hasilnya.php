@@ -3,7 +3,7 @@ if ($_GET['met']=='scheffe'){
 ?>
 
 
-<div class="ms-5 p-3 col-10 bg-light rounded-5">
+<div style="margin-left: 8%;" class=" p-3 col-10 bg-light rounded-5 divtable">
     <h1>Tabel SAW</h1>
     <table class=" table table-borderless rounded-5 table-hover text-center">
         <thead>
@@ -39,7 +39,7 @@ if ($_GET['met']=='scheffe'){
     </table>
 </div>
 
-<div class="ms-5 p-3 col-10 bg-light rounded-5">
+<div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5">
     <h1>Tabel WP</h1>
     <table class=" table table-borderless rounded-5 table-hover text-center">
         <thead>
@@ -86,9 +86,9 @@ if ($_GET['met']=='scheffe'){
 </div>
 
 
-<div class="ms-5 p-3 col-10 bg-light rounded-5">
+<div style="margin-left: 8%;" class=" p-3 divtable  col-10 bg-light rounded-5">
     <h1>Tabel SMART</h1>
-    <table class=" table table-borderless rounded-5 table-hover text-center">
+    <table class="table table-borderless rounded-5 table-hover text-center">
         <thead>
 
             <tr>
@@ -138,9 +138,9 @@ if ($_GET['met']=='scheffe'){
 <?php }else{ ?>
 
 
-    <div class="ms-5 p-3 col-10 bg-light rounded-5">
+    <div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5 divtable">
     <h1>Tabel SAW</h1>
-    <table class=" table table-borderless rounded-5 table-hover text-center">
+    <table class=" table  table-borderless rounded-5 table-hover text-center">
         <thead>
 
             <tr>
@@ -174,7 +174,7 @@ if ($_GET['met']=='scheffe'){
     </table>
 </div>
 
-<div class="ms-5 p-3 col-10 bg-light rounded-5">
+<div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5">
     <h1>Tabel WP</h1>
     <table class=" table table-borderless rounded-5 table-hover text-center">
         <thead>
@@ -229,9 +229,9 @@ if ($_GET['met']=='scheffe'){
 </div>
 
 
-<div class="ms-5 p-3 col-10 bg-light rounded-5">
+<div style="margin-left: 8%;" class="p-3 col-10 divtable bg-light rounded-5">
     <h1>Tabel SMART</h1>
-    <table class="table table-borderless rounded-5 table-hover text-center">
+    <table class="table  table-borderless rounded-5 table-hover text-center">
         <thead>
 
             <tr>

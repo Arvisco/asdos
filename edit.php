@@ -1,4 +1,6 @@
-<?php include 'cuy.php';
+<?php
+
+include 'cuy.php';
 $z = $_GET['z'];
 $updatean = mysqli_query($c, "SELECT * FROM kandidat WHERE id LIKE '$z' ");
 $x = mysqli_fetch_assoc($updatean);
@@ -10,8 +12,8 @@ $x = mysqli_fetch_assoc($updatean);
     };
 </script>
 
-<button id="edit" type="button" data-bs-toggle="modal" data-bs-target="#exampleModaledit">Updating Data...</button>
-
+<a id="edit" type="button" data-bs-toggle="modal" data-bs-target="#exampleModaledit">Updating Data...</a>
+<div class="spinner-border text-dark"></div>
 <div class="modal fade" id="exampleModaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -56,8 +58,14 @@ $x = mysqli_fetch_assoc($updatean);
                                         mysqli_query($c, "UPDATE kandidat SET  pics = '$picss', nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
                                         mysqli_query($c, "UPDATE kandidatwp SET  pics = '$picss', nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
                                         mysqli_query($c, "UPDATE kandidatsmart SET  pics = '$picss', nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
+                                        // header('Location:crudasdos');
                                     }
-                                    header('Location:index.php');
+                                    if (isset($_POST['gass'])) {
+                                        header('Location:crudasdos.php');
+                                        ob_flush();
+                                    }
+                                   
+                                   
                                     ?>
 
 

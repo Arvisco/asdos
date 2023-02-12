@@ -24,9 +24,9 @@
         <div class="row g-0">
           <div class="col-md-5">
             <img src="img04.jpg" class="img-fluid rounded-start" alt="...">
-            <h5 class="card-title"><?= $a['nama'] ?></h5>
-            <p class="card-text"><?= $a['keterangan'] ?></p>
-            <p>Ipk : <?= $a['c2'] ?></p>
+            <h5 class="nama"><?= $a['nama'] ?></h5>
+            <p class="ket"><?= $a['keterangan'] ?></p>
+            <p class="ket">Ipk : <?= $a['c2'] ?></p>
 
           </div>
           <div class="col-md-7">
@@ -49,7 +49,7 @@
                 <input type="hidden" name="kom" id="komx"></span>
                 
                 
-                <button type="submit" name="gas" class="btn btn-primary">Input</button>
+                <button type="submit" name="gas" class="button-90">Input</button>
                 </form>
 <?php 
 if(isset($_POST['gas'])){

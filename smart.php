@@ -24,9 +24,9 @@
         <div class="row g-0">
           <div class="col-md-5">
             <img src="img04.jpg" class="img-fluid rounded-start" alt="...">
-            <h5 class="card-title"><?= $a['nama'] ?></h5>
-            <p class="card-text"><?= $a['keterangan'] ?></p>
-            <p>Ipk : <?= $a['c2'] ?></p>
+            <h5 class="nama"><?= $a['nama'] ?></h5>
+            <p class="ket"><?= $a['keterangan'] ?></p>
+            <p class="ket">Ipk : <?= $a['c2'] ?></p>
 
           </div>
           <div class="col-md-7">
@@ -37,7 +37,7 @@
                 <input type="hidden" name="kem" id="huh"></span>
 
               <label for="customRange3" class="form-label">Tanggung Jawab</label>
-              <input type="range" class=" " min="1" max="5" step="1" onchange="xtj(this.value);" id="tj"><span>
+              <input type="range" class="form-range" min="1" max="5" step="1" onchange="xtj(this.value);" id="tj"><span>
                 <input type="hidden" name="tj" id="tjx"></span>
 
               <label for="customRange3" class="form-label">Inisiatif &nbsp;</label>
@@ -49,7 +49,7 @@
                 <input type="hidden" name="kom" id="komx"></span>
                 
                 
-                <button type="submit" name="gas" class="btn btn-primary">Input</button>
+                <button type="submit" name="gas" class="button-90">Input</button>
                 </form>
 <?php 
 if(isset($_POST['gas'])){
@@ -61,7 +61,7 @@ if(isset($_POST['gas'])){
   mysqli_query($c, "UPDATE kandidatsmart SET c1 = '$kem', c3 = '$tj', c4 = '$ins', c5='$kom' WHERE keterangan LIKE '$wle' ");
   if ($xpages < $xtotalpages) {
     header('Location:smart.php?pages='.$xnext); }
-}
+}ob_flush();
 ?>
 
 

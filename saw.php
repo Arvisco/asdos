@@ -65,7 +65,7 @@
                 mysqli_query($c, "UPDATE kandidat SET c1 = '$kem', c3 = '$tj', c4 = '$ins', c5='$kom' WHERE keterangan LIKE '$wle' ");
                 if ($xpages < $xtotalpages) {
                   header('Location:saw.php?pages=' . $xnext);
-                }
+                }else{header('Location:tunggu.php');}
               }
               ?>
 

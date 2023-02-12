@@ -12,6 +12,7 @@ if ($_GET['met']=='scheffe'){
                 <th scope="col">No</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Hasilnya</th>
+                <th scope="col">Rank</th>
                 <!-- <th scope="col">Ranking</th> -->
                 <!-- <th scope="col">Tanggung Jawab</th> -->
                 <!-- <th scope="col">Inisiatif</th> -->
@@ -46,8 +47,9 @@ if ($_GET['met']=='scheffe'){
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Nama</th>
-                <th scope="col">Nilai S</th>
-                <th scope="col">Nilai V</th>
+
+                <th scope="col">Hasil</th>
+                <th scope="col">Rank</th>
 
                 <!-- <th scope="col">Tanggung Jawab</th> -->
                 <!-- <th scope="col">Inisiatif</th> -->
@@ -145,6 +147,7 @@ if ($_GET['met']=='scheffe'){
                 <th scope="col">No</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Hasilnya</th>
+                <th scope="col">Rank</th>
                 <!-- <th scope="col">Ranking</th> -->
                 <!-- <th scope="col">Tanggung Jawab</th> -->
                 <!-- <th scope="col">Inisiatif</th> -->
@@ -181,6 +184,7 @@ if ($_GET['met']=='scheffe'){
                 <th scope="col">Nama</th>
              
                 <th scope="col">Hasil</th>
+                <th scope="col">Rank</th>
 
                 <!-- <th scope="col">Tanggung Jawab</th> -->
                 <!-- <th scope="col">Inisiatif</th> -->
@@ -199,10 +203,18 @@ if ($_GET['met']=='scheffe'){
                     <td><?= $a['nama'] ?></td>
 
                     <?php $wecapek = mysqli_query($c, "SELECT * FROM wp_w");
-                    foreach ($wecapek as $w) :   ?>
-                        <td><?= pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']) ?></td>
-                    <?php endforeach; ?>
+                    foreach ($wecapek as $w) :  
+                    ?>
+                        <!-- <td id="olah"><?= pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']) ?></td> -->
+                     <td>
+                        <?php
+                        $telaso = pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']);
+                        $saripa = $telaso / ($telaso+$telaso);
+                        echo $saripa;
+                        ?>
 
+                     </td>
+                    <?php endforeach; ?>
                     <?php
                     // foreach ($wecapek as $d):
                     // $totals =  pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']);
@@ -219,7 +231,7 @@ if ($_GET['met']=='scheffe'){
 
 <div class="ms-5 p-3 col-10 bg-light rounded-5">
     <h1>Tabel SMART</h1>
-    <table class=" table table-borderless rounded-5 table-hover text-center">
+    <table class="table table-borderless rounded-5 table-hover text-center">
         <thead>
 
             <tr>
@@ -250,8 +262,8 @@ if ($_GET['met']=='scheffe'){
                 $x5 = 100 * (5 - $a['c5']) / 5;
                 $twj = ($z1 * $x1) + ($z2 * $x2) + ($z3 * $x3) + ($z4 * $x4) + ($z5 * $x5);
                 global $min, $man;
-                $min = min($twj);
-                $max = max($twj)
+               
+                // $max = max($twj)
             ?>
                 <tr>
 
@@ -259,7 +271,7 @@ if ($_GET['met']=='scheffe'){
                     <td><?= $a['nama'] ?></td>
                   
                     <td><?= $twj ?></td>
-                    <td><?= $min ?></td>
+               
 
 
 

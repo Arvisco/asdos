@@ -17,19 +17,19 @@
 </script>
 <?php include 'cuy.php'; ?>
 
-<div class="container">
+<div class="position-relative">
   <?php while($a=mysqli_fetch_assoc($wpdata)){ ?>
-    <div class="mx-5 col-6 bg-light rounded-5">
-      <div class="card mb-3 p-3" style="max-width: 600px;">
+    <div style="margin-top: 200px;" class="container d-flex h-50 align-items-center justify-content-center p-5 bg-light rounded-5">
+      <!-- <div class="card mb-3 p-3" style="max-width: 600px;"> -->
         <div class="row g-0">
-          <div class="col-md-4">
+          <div class="col-md-5">
             <img src="img04.jpg" class="img-fluid rounded-start" alt="...">
             <h5 class="card-title"><?= $a['nama'] ?></h5>
             <p class="card-text"><?= $a['keterangan'] ?></p>
             <p>Ipk : <?= $a['c2'] ?></p>
 
           </div>
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="card-body">
               <form action='' method='post'>
               <label for="customRange3" class="form-label">Kemahiran</label>

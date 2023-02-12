@@ -21,23 +21,23 @@
 </script>
 <?php include 'cuy.php'; ?>
 
-<div class="container">
+<div class="position-relative">
   <?php while ($a = mysqli_fetch_assoc($products)) { ?>
-    <div class="mx-5 col-6 bg-light rounded-5">
-      <div class="card mb-3 p-3" style="max-width: 600px;">
+    <div style="margin-top: 200px;" class="container d-flex h-50 align-items-center justify-content-center p-5 bg-light rounded-5">
+      <!-- <div class="card mb-3" style="max-width: 600px;"> -->
         <div class="row g-0">
-          <div class="col-md-4">
-            <img src="img04.jpg" class="img-fluid rounded-start" alt="...">
-            <h5 class="card-title"><?= $a['nama'] ?></h5>
-            <p class="card-text"><?= $a['keterangan'] ?></p>
-            <p>Ipk : <?= $a['c2'] ?></p>
+          <div class="col-md-5">
+            <img src="storage/img04.jpg" class="img-fluid rounded-start" style="width: 150px; height: auto;" alt="...">
+            <h5 class="nama"><?= $a['nama'] ?></h5>
+            <p class="ket"><?= $a['keterangan'] ?></p>
+            <p class="ket">Ipk : <?= $a['c2'] ?></p>
 
           </div>
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="card-body">
               <form action='' method='post'>
                 <label for="customRange3" class="form-label">Kemahiran</label>
-                <input type="range" class="form-range" min="1" max="5" step="1" onchange="kemahiran(this.value);" id="customRange3"><span>
+                <input type="range" class="form-range " min="1" max="5" step="1" onchange="kemahiran(this.value);" id="customRange3"><span>
                   <input type="hidden" name="kem" id="huh"></span>
 
                 <label for="customRange3" class="form-label">Tanggung Jawab</label>
@@ -53,7 +53,7 @@
                   <input type="hidden" name="kom" id="komx"></span>
 
 
-                <button onclick="next()" type="submit" name="gas" class="btn btn-primary">Input</button>
+                <button onclick="next()" type="submit" name="gas" class="button-90">Input</button>
               </form>
               <?php
               if (isset($_POST['gas'])) {
@@ -77,7 +77,7 @@
             </div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
 
   <?php }   ?>

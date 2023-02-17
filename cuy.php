@@ -3,7 +3,7 @@ ob_start();
 global $c;
 $c = mysqli_connect('localhost', 'root', '', 'asdos');
 $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
-// error_reporting(0);
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +13,18 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="shortcut icon" type="image/png" href="storage/icon.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.1/sweetalert2.min.js" integrity="sha512-vCI1Ba/Ob39YYPiWruLs4uHSA3QzxgHBcJNfFMRMJr832nT/2FBrwmMGQMwlD6Z/rAIIwZFX8vJJWDj7odXMaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.1/sweetalert2.css" integrity="sha512-JzSVRb7c802/njMbV97pjo1wuJAE/6v9CvthGTDxiaZij/TFpPQmQPTcdXyUVucsvLtJBT6YwRb5LhVxX3pQHQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.1/sweetalert2.all.min.js" integrity="sha512-KfbhdnXs2iEeelTjRJ+QWO9veR3rm6BocSoNoZ4bpPIZCsE1ysIRHwV80yazSHKmX99DM0nzjoCZjsjNDE628w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600&family=Poppins:wght@500&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap" rel="stylesheet">
   <!-- sweetalert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -52,7 +59,14 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
 
     .ket {
       font-family: 'Arial', sans-serif;
-      font-size: 20px;
+      font-size: 15px;
+      /* white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; */
+    }
+
+    .ket:hover {
+      overflow: visible;
     }
 
 
@@ -74,7 +88,8 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
       touch-action: manipulation;
       cursor: pointer;
       font-family: 'Be Vietnam Pro', sans-serif;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+      margin-top: 10px;
     }
 
     .btn-edit {
@@ -100,6 +115,7 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
     .btn-hapus {
       color: #fff;
       padding: 15px 25px;
+      margin-top: 100%;
       border-radius: 100px;
       background-color: #C21010;
       background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%), radial-gradient(66% 87% at 26% 20%, rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
@@ -120,9 +136,10 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
     .btn-back {
       color: #fff;
       padding: 15px 25px;
-      /* border-radius: 100px; */
+      border-radius: 89% 11% 13% 87% / 47% 47% 53% 53%;
       /* border-radius: 93% 7% 8% 92% / 53% 51% 49% 47% ; */
-      clip-path: polygon(6% 44%, 20% 30%, 46% 19%, 68% 15%, 82% 18%, 89% 26%, 84% 36%, 70% 40%, 55% 45%, 48% 57%, 58% 64%, 70% 68%, 86% 71%, 89% 81%, 85% 90%, 73% 94%, 60% 91%, 43% 88%, 24% 82%, 5% 69%, 1% 56%);
+      z-index: 2;
+
       background-color: #453C67;
       background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%), radial-gradient(66% 87% at 26% 20%, rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
       box-shadow: 2px 19px 31px rgba(0, 0, 0, 0.2);
@@ -131,12 +148,38 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
       text-align: center;
       text-decoration: none;
       border: 0;
+      margin-left: 1%;
+      margin-right: 1%;
       user-select: none;
       -webkit-user-select: none;
       touch-action: manipulation;
       cursor: pointer;
       font-family: 'Be Vietnam Pro', sans-serif;
       margin-bottom: 10px;
+    }
+    .btn-reset {
+      color: #fff;
+      padding: 15px 25px;
+      border-radius: 26% 25% 39% 41% / 18% 16% 63% 66%;
+      /* border-radius: 93% 7% 8% 92% / 53% 51% 49% 47% ; */
+      z-index: 2;
+      background-color: red;
+      background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%), radial-gradient(66% 87% at 26% 20%, rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
+      box-shadow: 2px 19px 31px rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      border: 0;
+      margin-left: 1%;
+      margin-right: 1%;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      margin-bottom: 12px;
+      margin-top: 5px;
     }
 
     .divtable {
@@ -158,6 +201,18 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
       cursor: pointer;
       font-family: 'Be Vietnam Pro', sans-serif;
       margin-bottom: 20px;
+    }
+
+
+    @media (max-width: 700px) {
+      .res {
+        display: grid;
+        /* grid-template-columns: 1fr 1fr 1fr; */
+        grid-template-rows: 50% 50%;
+        /* grid-template-columns: repeat(1, auto); */
+        grid-template-rows: repeat(1, auto);
+        grid-gap: 50%;
+      }
     }
 
     /* .containers{
@@ -209,9 +264,23 @@ $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
   // $total_rows = mysqli_fetch_array($datasmart)[0];
   $sprow = mysqli_num_rows($datasmart);
   $stotalpages = ceil($sprow / $slimit);
-  $smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart ORDER BY keterangan LIMIT $sfirstpage, $slimit ");
+if ($_GET['met']=='scheffe'){
+  $smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart WHERE z LIKE '0' ORDER BY pics DESC LIMIT $sfirstpage, $slimit ");
+}else{
+  $smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart WHERE x LIKE '0' ORDER BY pics ASC LIMIT $sfirstpage, $slimit ");
+}
   $snumber = $sfirstpage + 1;
+ 
 
+
+
+  // data hasil taker
+  $sawnormal = mysqli_query($c, "SELECT * FROM hasilsawnormal ORDER BY hasil DESC");
+  $wpnormal = mysqli_query($c, "SELECT * FROM hasilwpnormal ORDER BY hasil DESC");
+  $smartnormal = mysqli_query($c, "SELECT * FROM hasilsmartnormal ORDER BY hasil DESC");
+  $sawscheffe = mysqli_query($c, "SELECT * FROM hasilsawscheffe ORDER BY hasil DESC");
+  $wpscheffe = mysqli_query($c, "SELECT * FROM hasilwpscheffe ORDER BY hasil DESC");
+  $smartscheffe = mysqli_query($c, "SELECT * FROM hasilsmartscheffe ORDER BY hasil DESC");
 
   //   $limit = 1;
   //   $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;

@@ -1,7 +1,6 @@
-<?php
+<?php 
+include 'cuy.php'; $Z = $_GET['z']; 
 
-include 'cuy.php';
-$Z = $_GET['z'];
     mysqli_query($c, "DELETE FROM kandidat WHERE id LIKE '$Z' ");
     $a='ds';
     if($a != ''){
@@ -13,6 +12,7 @@ $Z = $_GET['z'];
     }
     
 
-header('Location:crudasdos.php');
+header('Location:crudasdos.php?state=delcheck');
+
 ob_flush();
 ?>

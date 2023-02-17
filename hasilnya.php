@@ -1,286 +1,273 @@
-<?php include 'cuy.php'; 
-if ($_GET['met']=='scheffe'){
+
+
+<?php
+
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
+
+include 'cuy.php';
+if ($_GET['met'] == 'scheffe') {
 ?>
+<button onclick="sortTable()">Sort</button>
+    <a class="btn-back" href="index.php"><i class="fa-solid fa-chevron-left"></i></a>
+    <div style="margin-left: 8%;" class=" p-3 col-10 bg-light rounded-5 divtable">
+        <h1>Tabel SAW</h1>
+        <table id="myTable" class=" table table-borderless rounded-5 table-hover text-center">
+            <thead>
 
-
-<div style="margin-left: 8%;" class=" p-3 col-10 bg-light rounded-5 divtable">
-    <h1>Tabel SAW</h1>
-    <table class=" table table-borderless rounded-5 table-hover text-center">
-        <thead>
-
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Hasilnya</th>
-                <th scope="col">Rank</th>
-                <!-- <th scope="col">Ranking</th> -->
-                <!-- <th scope="col">Tanggung Jawab</th> -->
-                <!-- <th scope="col">Inisiatif</th> -->
-                <!-- <th scope="col">Komunikatif</th> -->
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-
-            $z = 1;
-            foreach ($datakandidat as $a) :
-            ?>
                 <tr>
-                    <td><?= $z++ ?></td>
-                    <td><?= $a['nama'] ?></td>
-                    <!-- <td><?= $a['c1'] + $a['c2'] + $a['c3'] + $a['c4'] + $a['c5'] ?></td> -->
-                    <td><?= ($a['c1'] * (-309)) + ($a['c2']*(-414)) + ($a['c3'] * (-96)) + ($a['c4'] * 285) + ($a['c5'] * 573) ?></td>
-
-
+                    <th onclick="sortTable()" scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Hasil</th>
+                    
+                    <!-- <th scope="col">Ranking</th> -->
+                    <!-- <th scope="col">Tanggung Jawab</th> -->
+                    <!-- <th scope="col">Inisiatif</th> -->
+                    <!-- <th scope="col">Komunikatif</th> -->
 
                 </tr>
-            <?php endforeach; ?>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <?php
 
-<div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5">
-    <h1>Tabel WP</h1>
-    <table class=" table table-borderless rounded-5 table-hover text-center">
-        <thead>
+                $z = 1;
+                foreach ($sawscheffe as $a) :
+                ?>
+                    <tr>
+                        <td><?= $z++ ?></td>
+                        <td><?= $a['nama'] ?></td>
+                        
+                        <td><?= $a['hasil'] ?></td>
 
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
 
-                <th scope="col">Hasil</th>
-                <th scope="col">Rank</th>
 
-                <!-- <th scope="col">Tanggung Jawab</th> -->
-                <!-- <th scope="col">Inisiatif</th> -->
-                <!-- <th scope="col">Komunikatif</th> -->
+                    </tr>
+                <?php endforeach; ?>
+        </table>
+    </div>
 
-            </tr>
-        </thead>
-        <tbody>
-            <?php
+    <div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5">
+        <h1>Tabel WP</h1>
+        <table class=" table table-borderless rounded-5 table-hover text-center">
+            <thead>
 
-            $z = 1;
-            foreach ($datakandidat as $a) :
-            ?>
                 <tr>
-                    <td><?= $z++ ?></td>
-                    <td><?= $a['nama'] ?></td>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
 
-                    <?php $wecapek = mysqli_query($c, "SELECT * FROM wp_w");
-                    foreach ($wecapek as $w) :   ?>
-                        <td><?= pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']) ?></td>
+                    <th scope="col">Hasil</th>
+                    
+
+                    <!-- <th scope="col">Tanggung Jawab</th> -->
+                    <!-- <th scope="col">Inisiatif</th> -->
+                    <!-- <th scope="col">Komunikatif</th> -->
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+$sum = mysqli_query($c, "SELECT SUM(hasil) AS skom FROM hasilwpscheffe");
+$bismillah = mysqli_fetch_assoc($sum);
+$selesaima=$bismillah['skom'];
+
+                $z = 1;
+                foreach ($wpscheffe as $a) :
+                ?>
+                    <tr>
+                        <td><?= $z++ ?></td>
+                        <td><?= $a['nama'] ?></td>
+
+                        
+                            <td><?= $a['hasil']/$selesaima ?></td>
+                       
+
+                    
+
+
+
+
                     <?php endforeach; ?>
-
-                    <?php
-                    // foreach ($wecapek as $d):
-                    // $totals =  pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']);
-
-                    ?>
+        </table>
+    </div>
 
 
+    <div style="margin-left: 8%;" class=" p-3 divtable  col-10 bg-light rounded-5">
+        <h1>Tabel SMART</h1>
+        <table class="table table-borderless rounded-5 table-hover text-center">
+            <thead>
 
-
-            <?php endforeach; ?>
-    </table>
-</div>
-
-
-<div style="margin-left: 8%;" class=" p-3 divtable  col-10 bg-light rounded-5">
-    <h1>Tabel SMART</h1>
-    <table class="table table-borderless rounded-5 table-hover text-center">
-        <thead>
-
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-         
-                <th scope="col">Hasilnya</th>
-                <th scope="col">RANK</th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-
-            $z1 = -7.9;
-            $z2 = -11;
-            $z3 = -2.5;
-            $z4 = 7.3;
-            $z5 = 15;
-
-            $z = 1;
-            foreach ($datakandidat as $a) :
-                $x1 = 100 * (5 - $a['c1']) / 5;
-                $x2 = 100 * (5 - $a['c2']) / 5;
-                $x3 = 100 * (5 - $a['c3']) / 5;
-                $x4 = 100 * (5 - $a['c4']) / 5;
-                $x5 = 100 * (5 - $a['c5']) / 5;
-                $twj = ($z1 * $x1) + ($z2 * $x2) + ($z3 * $x3) + ($z4 * $x4) + ($z5 * $x5);
-            ?>
                 <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
 
-                    <td><?= $z++ ?></td>
-                    <td><?= $a['nama'] ?></td>
-                   
-                    <td><?= $twj ?></td>
-
-
-
+                    <th scope="col">Hasil</th>
+                  
 
 
                 </tr>
-            <?php endforeach; ?>
-    </table>
-</div>
+            </thead>
+            <tbody>
+              
 
-<?php }else{ ?>
+                    <tr>
 
+                        <td><?= $z++ ?></td>
+                        <td><?= $a['nama'] ?></td>
+
+                        <td><?= $a['hasil']?></td>
+
+
+
+
+
+                    </tr>
+                
+        </table>
+    </div>
+
+<?php } else { ?>
+    <a class="btn-back pull-right" href="index.php"><i class="fa-solid fa-chevron-left"></i></a>
 
     <div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5 divtable">
-    <h1>Tabel SAW</h1>
-    <table class=" table  table-borderless rounded-5 table-hover text-center">
-        <thead>
+        <h1>Tabel SAW</h1>
+        <table class=" table  table-borderless rounded-5 table-hover text-center">
+            <thead>
 
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Hasilnya</th>
-                <th scope="col">Rank</th>
-                <!-- <th scope="col">Ranking</th> -->
-                <!-- <th scope="col">Tanggung Jawab</th> -->
-                <!-- <th scope="col">Inisiatif</th> -->
-                <!-- <th scope="col">Komunikatif</th> -->
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-
-            $z = 1;
-            foreach ($datakandidat as $a) :
-            ?>
                 <tr>
-                    <td><?= $z++ ?></td>
-                    <td><?= $a['nama'] ?></td>
-                    <!-- <td><?= $a['c1'] + $a['c2'] + $a['c3'] + $a['c4'] + $a['c5'] ?></td> -->
-                    <td><?= ($a['c1'] * 5) + ($a['c2']) + ($a['c3'] * 4) + ($a['c4'] * 3) + ($a['c5'] * 2) ?></td>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Hasil</th>
+                    
 
-
+                    <!-- <th scope="col">Ranking</th> -->
+                    <!-- <th scope="col">Tanggung Jawab</th> -->
+                    <!-- <th scope="col">Inisiatif</th> -->
+                    <!-- <th scope="col">Komunikatif</th> -->
 
                 </tr>
-            <?php endforeach; ?>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <?php
 
-<div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5">
-    <h1>Tabel WP</h1>
-    <table class=" table table-borderless rounded-5 table-hover text-center">
-        <thead>
+                $z = 1;
+                $results = array();
+                foreach ($sawnormal as $a) :
+                ?>
+                    <tr>
+                        <td><?= $z++ ?></td>
+                        <td><?= $a['nama'] ?></td>
 
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-             
-                <th scope="col">Hasil</th>
-                <th scope="col">Rank</th>
-
-                <!-- <th scope="col">Tanggung Jawab</th> -->
-                <!-- <th scope="col">Inisiatif</th> -->
-                <!-- <th scope="col">Komunikatif</th> -->
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-
-            $z = 1;
-            foreach ($datakandidat as $a) :
-            ?>
-                <tr>
-                    <td><?= $z++ ?></td>
-                    <td><?= $a['nama'] ?></td>
-
-                    <?php $wecapek = mysqli_query($c, "SELECT * FROM wp_w");
-                    foreach ($wecapek as $w) :  
-                    ?>
-                        <!-- <td id="olah"><?= pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']) ?></td> -->
-                     <td>
-                        <?php
-                        $telaso = pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']);
-                        $saripa = $telaso / ($telaso+$telaso);
-                        echo $saripa;
-                        ?>
-
-                     </td>
+                        <td><?=$a['hasil'] ?></td>
+                        
+                    </tr>
                     <?php endforeach; ?>
-                    <?php
-                    // foreach ($wecapek as $d):
-                    // $totals =  pow($a['c1'], $w['w1']) * pow($a['c2'], $w['w2']) * pow($a['c3'], $w['w3']) * pow($a['c4'], $w['w4']) * pow($a['c5'], $w['w5']);
+                
+                
+              
+            </tbody>
+        </table>
+    </div>
 
-                    ?>
+    <div style="margin-left: 8%;" class=" p-3 divtable col-10 bg-light rounded-5">
+        <h1>Tabel WP</h1>
+        <table class=" table table-borderless rounded-5 table-hover text-center">
+            <thead>
 
-
-
-
-            <?php endforeach; ?>
-    </table>
-</div>
-
-
-<div style="margin-left: 8%;" class="p-3 col-10 divtable bg-light rounded-5">
-    <h1>Tabel SMART</h1>
-    <table class="table  table-borderless rounded-5 table-hover text-center">
-        <thead>
-
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-               
-                <th scope="col">Total Wj</th>
-                <th scope="col">RANK</th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-
-            $z1 = 0.33;
-            $z2 = 0.06;
-            $z3 = 0.26;
-            $z4 = 0.2;
-            $z5 = 0.13;
-
-            $z = 1;
-            foreach ($datakandidat as $a) :
-                $x1 = 100 * (5 - $a['c1']) / 5;
-                $x2 = 100 * (5 - $a['c2']) / 5;
-                $x3 = 100 * (5 - $a['c3']) / 5;
-                $x4 = 100 * (5 - $a['c4']) / 5;
-                $x5 = 100 * (5 - $a['c5']) / 5;
-                $twj = ($z1 * $x1) + ($z2 * $x2) + ($z3 * $x3) + ($z4 * $x4) + ($z5 * $x5);
-                global $min, $man;
-               
-                // $max = max($twj)
-            ?>
                 <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
 
-                    <td><?= $z++ ?></td>
-                    <td><?= $a['nama'] ?></td>
-                  
-                    <td><?= $twj ?></td>
-               
+                    <th scope="col">Hasil</th>
+   
 
+
+                    <!-- <th scope="col">Tanggung Jawab</th> -->
+                    <!-- <th scope="col">Inisiatif</th> -->
+                    <!-- <th scope="col">Komunikatif</th> -->
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sum = mysqli_query($c, "SELECT SUM(hasil) AS skom FROM hasilwpnormal");
+                $bismillah = mysqli_fetch_assoc($sum);
+                $selesaima=$bismillah['skom'];
+
+                $z = 1;
+                $results = array();
+                foreach ($wpnormal as $a) :
+                ?>
+                    <tr>
+                        <td><?= $z++ ?></td>
+                        <td><?= $a['nama'] ?></td>
+
+                       
+                            <td>
+                                <?= $a['hasil']/$selesaima ?>
+                            </td>
+                 
+                     
+                       
+                       
+                 
+
+
+                    </tr>
+                    <?php endforeach;
+                    ?>
+        </table>
+    </div>
+
+
+    <div style="margin-left: 8%;" class="p-3 col-10 divtable bg-light rounded-5">
+        <h1>Tabel SMART</h1>
+        <table class="table  table-borderless rounded-5 table-hover text-center">
+            <thead>
+
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+
+                    <th scope="col">Hasil</th>
+            
 
 
 
 
                 </tr>
-            <?php endforeach; ?>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <?php
+
+                foreach ($smartnormal as $a) :
+                    $x1 = 100 * (5 - $a['c1']) / 5;
+                    $x2 = 100 * (5 - $a['c2']) / 5;
+                    $x3 = 100 * (5 - $a['c3']) / 5;
+                    $x4 = 100 * (5 - $a['c4']) / 5;
+                    $x5 = 100 * (5 - $a['c5']) / 5;
+                    $twj = ($z1 * $x1) + ($z2 * $x2) + ($z3 * $x3) + ($z4 * $x4) + ($z5 * $x5);
+                    array_push($results, $twj);
+                    global $min, $man;
+
+                    // $max = max($twj)
+                ?>
+                    <tr>
+
+                        <td><?= $z++ ?></td>
+                        <td><?= $a['nama'] ?></td>
+
+                        <td><?= $a['hasil']?></td>
+
+
+
+
+
+
+                    </tr>
+
+                <?php endforeach; ?>
+                
+        </table>
+    </div>
 
 
 

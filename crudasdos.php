@@ -1,4 +1,55 @@
-<?php include 'cuy.php'; ob_start();?>
+<?php include 'cuy.php'; ob_start();
+
+if($_GET['state']=='editcheck'){
+   echo "<script> 
+   Swal.fire(
+        'Operation Success',
+        'Data berhasil diedit',
+        'success') </script> ";
+      
+}elseif ($_GET['state']=='addcheck') {
+    echo " <script> Swal.fire(
+        'Operation Success',
+        'Data berhasil tersimpan',
+        'success') </script>  ";
+} elseif ($_GET['state']=='delcheck'){
+    echo " <script> Swal.fire(
+        'Operation Success',
+        'Data berhasil dihapus',
+        'success') </script>  ";
+}else{}
+
+?>
+
+<script>
+  $(document).ready(function() {
+    $('#deleteButton').click(function() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this record!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // User clicked the "Yes" button, so delete the record
+          $.ajax({
+            url: 'deletes.php',
+            data: {id: 123},
+            type: 'post',
+            success: function(response) {
+              // Handle the response from the server
+              alert('Record deleted!');
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +66,7 @@
             document.getElementById('p').click();
         }
     </script> -->
-    <a class="btn-back" href="index.php">
-         </a>
+    <a class="btn-back" href="index.php"><i class="fa-solid fa-chevron-left"></i></a>
             <button id="p" class="button-90" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Asdos</button>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -63,6 +113,7 @@
                                                     mysqli_query($c, "INSERT INTO kandidat (id, pics, nama, keterangan, c2) VALUES ('','$picss','$var2','$var4','$var3')");
                                                     mysqli_query($c, "INSERT INTO kandidatwp (id, pics, nama, keterangan, c2) VALUES ('','$picss','$var2','$var4','$var3')");
                                                     mysqli_query($c, "INSERT INTO kandidatsmart (id, pics, nama, keterangan, c2) VALUES ('','$picss','$var2','$var4','$var3')");
+                                                header('Location:crudasdos.php?state=addcheck');
                                                 }
                                                 ?>
 
@@ -81,14 +132,16 @@
                 </div>
             </div>
 
-            <table class="table table-striped table-hover align-items-center justify-content-center text-center">
+
+
+            <table class="table table-striped table-hover align-items-center table-responsive justify-content-center text-center">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Nama Lengkap</th>
-                        <th scope="col">Keterangan</th>
-                        <th scope="col"></th>
+                        <th scope="col" class="col-1">No</th>
+                        <th scope="col" class="col-1">Foto</th>
+                        <th scope="col" class="col-2">Nama Lengkap</th>
+                        <th scope="col" class="col-6">Keterangan</th>
+                        <th scope="col" class="col-4"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,19 +151,20 @@
                             <th><?= $z++ ?></th>
                             <td>
                                 <?php if ($d['pics'] == '') { ?>
-                                    <img style="width: 80px; height: 80px;" src="storage/img04.jpg" alt="">
+                                    <img style="width: 70px; height: 80px;" src="storage/img04.jpg" alt="">
 
                                 <?php } else { ?>
-                                    <img style="width: 80px; height: 80px;" src="storage/<?= $d['pics'] ?>" alt="">
+                                    <img style="width: 65px; height: 90px;" src="storage/<?= $d['pics'] ?>" alt="">
 
                                 <?php } ?>
                             </td>
                             <td><?= $d['nama'] ?></td>
                             <td><?= $d['keterangan'] ?></td>
-                            <td>
+                            <td class="res">
                                 <form method="post" action="" enctype="multipart/form-data">
-                                    <a href="deleter.php?z=<?= $d['id'] ?>" class="btn-hapus">Delete</a>
                                     <a href="edit.php?z=<?= $d['id'] ?>" class="btn-edit">Edit</a>
+                                    <a href="deleter.php?z=<?= $d['id'] ?>" class="btn-hapus">Delete</a>
+                                    <!-- <button id="deleteButton" class="btn-hapus">Delete</button> -->
 
 
                                 </form>

@@ -50,6 +50,7 @@ $x = mysqli_fetch_assoc($updatean);
                                     <?php
                                     if (isset($_POST['gass'])) {
                                         $picss = $_FILES['pp']['name'];
+                                        if($picss!=''){
                                         $storage = 'storage/';
                                         move_uploaded_file($_FILES['pp']['tmp_name'], $storage . $picss);
                                         $var2 = $_POST['nama'];
@@ -58,12 +59,23 @@ $x = mysqli_fetch_assoc($updatean);
                                         mysqli_query($c, "UPDATE kandidat SET  pics = '$picss', nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
                                         mysqli_query($c, "UPDATE kandidatwp SET  pics = '$picss', nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
                                         mysqli_query($c, "UPDATE kandidatsmart SET  pics = '$picss', nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
-                                        // header('Location:crudasdos');
+                                       
+                                        }
+                                        else{
+                                            $var2 = $_POST['nama'];
+                                            $var3 = $_POST['ipk'];
+                                            $var4 = $_POST['keterangan'];
+                                            mysqli_query($c, "UPDATE kandidat SET  nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
+                                            mysqli_query($c, "UPDATE kandidatwp SET  nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
+                                            mysqli_query($c, "UPDATE kandidatsmart SET  nama='$var2', keterangan='$var4', c2='$var3' WHERE id LIKE '$z'");
+                                           
+                                        }
+                                        header('Location:crudasdos.php?state=editcheck');
                                     }
-                                    if (isset($_POST['gass'])) {
-                                        header('Location:crudasdos.php');
-                                        ob_flush();
-                                    }
+                                    // if (isset($_POST['gass'])) {
+                                    //     header('Location:crudasdos.php');
+                                    //     ob_flush();
+                                    // }
                                    
                                    
                                     ?>

@@ -1,8 +1,11 @@
 <?php
 ob_start();
+session_start();
 global $c;
-$c = mysqli_connect('localhost', 'root', '', 'asdos');
+
+$c = mysqli_connect('localhost', 'root', 'root', 'asdos');
 $datakandidat = mysqli_query($c, "SELECT * FROM kandidat");
+$datadosen = mysqli_query($c, "SELECT * FROM user");
 error_reporting(0);
 ?>
 <!DOCTYPE html>
@@ -37,6 +40,9 @@ error_reporting(0);
 </head>
 
 <body>
+<script>
+  AOS.init();
+</script>
   <style>
     body {
       background-color: #f3f3aa;
@@ -157,6 +163,7 @@ error_reporting(0);
       font-family: 'Be Vietnam Pro', sans-serif;
       margin-bottom: 10px;
     }
+
     .btn-reset {
       color: #fff;
       padding: 15px 25px;
@@ -238,7 +245,7 @@ error_reporting(0);
 
   $xprow = mysqli_num_rows($datakandidat);
   $xtotalpages = ceil($xprow / $xlimit);
-  $products = mysqli_query($c, "SELECT * FROM kandidat ORDER BY id ASC LIMIT $xfirstpage, $xlimit ");
+  $products = mysqli_query($c, "SELECT * FROM kandidat ORDER BY nim ASC LIMIT $xfirstpage, $xlimit ");
   $xnumber = $xfirstpage + 1;
 
 
@@ -254,30 +261,30 @@ error_reporting(0);
   $wpdata = mysqli_query($c, "SELECT * FROM kandidat ORDER BY id DESC LIMIT $wfirstpage, $wlimit ");
   $wnumber = $wfirstpage + 1;
 
-  //data taker smart
-  $slimit = 1;
-  $spages = isset($_GET['pages']) ? (int)$_GET['pages'] : 1;
-  $sfirstpage = ($spages > 1) ? ($spages * $slimit) - $slimit : 0;
-  $sprevious = $spages - 1;
-  $snext = $spages + 1;
-  $datasmart = mysqli_query($c, "SELECT * FROM kandidatsmart");
-  // $total_rows = mysqli_fetch_array($datasmart)[0];
-  $sprow = mysqli_num_rows($datasmart);
-  $stotalpages = ceil($sprow / $slimit);
-if ($_GET['met']=='scheffe'){
-  $smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart WHERE z LIKE '0' ORDER BY pics DESC LIMIT $sfirstpage, $slimit ");
-}else{
-  $smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart WHERE x LIKE '0' ORDER BY pics ASC LIMIT $sfirstpage, $slimit ");
-}
-  $snumber = $sfirstpage + 1;
- 
+  // //data taker smart
+  // $slimit = 1;
+  // $spages = isset($_GET['pages']) ? (int)$_GET['pages'] : 1;
+  // $sfirstpage = ($spages > 1) ? ($spages * $slimit) - $slimit : 0;
+  // $sprevious = $spages - 1;
+  // $snext = $spages + 1;
+  // $datasmart = mysqli_query($c, "SELECT * FROM kandidatsmart");
+  // // $total_rows = mysqli_fetch_array($datasmart)[0];
+  // $sprow = mysqli_num_rows($datasmart);
+  // $stotalpages = ceil($sprow / $slimit);
+  // if ($_GET['met'] == 'scheffe') {
+  //   $smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart WHERE z LIKE '0' ORDER BY pics DESC LIMIT $sfirstpage, $slimit ");
+  // } else {
+  //   $smartdata = mysqli_query($c, "SELECT * FROM kandidatsmart WHERE x LIKE '0' ORDER BY pics ASC LIMIT $sfirstpage, $slimit ");
+  // }
+  // $snumber = $sfirstpage + 1;
+
 
 
 
   // data hasil taker
   $sawnormal = mysqli_query($c, "SELECT * FROM hasilsawnormal ORDER BY hasil DESC");
   $wpnormal = mysqli_query($c, "SELECT * FROM hasilwpnormal ORDER BY hasil DESC");
-  $smartnormal = mysqli_query($c, "SELECT * FROM hasilsmartnormal ORDER BY hasil DESC");
+  $smartnormal = mysqli_query($c, "SELECT * FROM hasilsmartnormal ORDER BY hasil ASC");
   $sawscheffe = mysqli_query($c, "SELECT * FROM hasilsawscheffe ORDER BY hasil DESC");
   $wpscheffe = mysqli_query($c, "SELECT * FROM hasilwpscheffe ORDER BY hasil DESC");
   $smartscheffe = mysqli_query($c, "SELECT * FROM hasilsmartscheffe ORDER BY hasil DESC");

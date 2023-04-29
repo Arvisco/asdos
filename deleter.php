@@ -1,5 +1,8 @@
 <?php 
 include 'cuy.php'; $Z = $_GET['z']; 
+if ($_GET['state']=='') {
+    # code...
+
 
     mysqli_query($c, "DELETE FROM kandidat WHERE id LIKE '$Z' ");
     $a='ds';
@@ -13,6 +16,9 @@ include 'cuy.php'; $Z = $_GET['z'];
     
 
 header('Location:crudasdos.php?state=delcheck');
-
+}else{
+    mysqli_query($c, "DELETE FROM user WHERE id LIKE '$Z'");
+    header('Location:cruddosen.php?state=delcheck');
+}
 ob_flush();
 ?>

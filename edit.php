@@ -96,6 +96,7 @@ if ($_GET['state'] != 'dosen'){
             </div>
         </div>
     </div>
+    <!-- kapunkap -->
 <?php } else{  ?>
 
 
